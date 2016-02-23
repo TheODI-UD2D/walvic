@@ -49,4 +49,12 @@ describe Walvic do
   it 'gets the correct number of lights to illuminate', :vcr do
     expect(walvic.num_lights).to eq(0)
   end
+
+  it 'turns the right lights on and off', :vcr do
+    expect(walvic.instance_variable_get("@pin_0")).to receive(:on)
+    expect(walvic.instance_variable_get("@pin_0")).to receive(:off)
+
+    walvic.illuminate
+  end
+
 end

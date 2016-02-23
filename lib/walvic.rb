@@ -45,4 +45,16 @@ class Walvic
     end
   end
 
+  def illuminate
+    (0..num_lights).each do |i|
+      instance_variable_get("@pin_#{i}").on
+      sleep 0.2
+    end
+    sleep 2
+    (num_lights).downto(0).each do |i|
+      instance_variable_get("@pin_#{i}").off
+      sleep 0.2
+    end
+  end
+
 end
