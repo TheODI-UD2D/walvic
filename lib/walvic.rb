@@ -12,7 +12,7 @@ class Walvic
   end
 
   def url
-    "http://goingunderground.herokuapp.com/stations/arriving/#{@station}/#{@direction}/#{@datetime}.json"
+    "http://goingunderground.herokuapp.com/stations/arriving/#{@direction}/#{@station}/#{@datetime}.json"
   end
 
   def json

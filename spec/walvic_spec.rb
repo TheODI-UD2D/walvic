@@ -12,7 +12,12 @@ describe Walvic do
   end
 
   it 'generates the correct URL' do
-    expect(walvic.url).to eq('http://goingunderground.herokuapp.com/stations/arriving/euston/southbound/2015-09-23T16:20:00.json')
+    expect(walvic.url).to eq('http://goingunderground.herokuapp.com/stations/arriving/southbound/euston/2015-09-23T16:20:00.json')
+  end
+
+  it 'gets some json' do
+    json = walvic.json
+    expect(walvic.json)
   end
 
 end
