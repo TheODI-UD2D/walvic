@@ -32,4 +32,7 @@ class Walvic
     average.floor
   end
 
+  def num_lights
+    ((average_occupancy / 10).floor.to_f / 2).floor
+  end
 end

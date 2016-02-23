@@ -37,4 +37,7 @@ describe Walvic do
     expect(walvic.average_occupancy).to eq(18)
   end
 
+  it 'gets the correct number of lights to illuminate', :vcr do
+    expect(walvic.num_lights).to eq(0)
+  end
 end
