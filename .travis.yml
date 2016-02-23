@@ -1,0 +1,9 @@
+language: ruby
+cache: bundler
+rvm:
+- 2.1.5
+env:
+  global:
+  - COVERAGE=1
+  - SIR_HANDEL_USERNAME=foo
+  - SIR_HANDEL_PASSWORD=bar
