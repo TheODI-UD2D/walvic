@@ -5,10 +5,19 @@ describe Walvic do
 
   before(:each) do
     Timecop.travel(now)
+    Walvic::PINS.each do |pin|
+      allow(PiPiper::Pin).to receive(:new).with(pin: pin, direction: :out) { instance_double(PiPiper::Pin, pin: pin) }
+    end
   end
 
   after(:each) do
     Timecop.return
+  end
+
+  it 'sets up lights on initialize' do
+    Walvic::PINS.each_with_index do |v, i|
+      expect(walvic.instance_variable_get("@pin_#{i}").pin).to eq(v)
+    end
   end
 
   it 'generates the correct URL' do

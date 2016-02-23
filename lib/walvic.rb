@@ -7,11 +7,14 @@ Dotenv.load
 
 class Walvic
 
+  PINS = [15, 18, 23, 24, 25, 8]
+
   def initialize(station, direction)
     @station, @direction = station, direction
     hour = Time.now.hour
     minute = Time.now.min
     @datetime = "2015-09-23T#{hour}:#{minute}:00"
+    setup_lights
   end
 
   def url
@@ -35,4 +38,11 @@ class Walvic
   def num_lights
     ((average_occupancy / 10).floor.to_f / 2).floor
   end
+
+  def setup_lights
+    PINS.each_with_index do |v, i|
+      instance_variable_set("@pin_#{i}", PiPiper::Pin.new(pin: v, direction: :out))
+    end
+  end
+
 end
