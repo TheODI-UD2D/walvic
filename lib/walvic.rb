@@ -1,6 +1,9 @@
 require 'json'
 require 'open-uri'
 require 'pi_piper'
+require 'dotenv'
+
+Dotenv.load
 
 class Walvic
 
@@ -16,7 +19,11 @@ class Walvic
   end
 
   def json
-    JSON.parse open(url).read
+    request = open(url, http_basic_authentication: [
+      ENV['SIR_HANDEL_USERNAME'],
+      ENV['SIR_HANDEL_PASSWORD']
+    ])
+    JSON.parse request.read
   end
 
 end

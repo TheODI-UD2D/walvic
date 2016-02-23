@@ -1,9 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
+    dotenv (2.0.2)
     eventmachine (1.0.9)
     ffi (1.9.10)
+    hashdiff (0.3.0)
     pi_piper (1.9.9)
       eventmachine (= 1.0.9)
       ffi
@@ -20,15 +25,24 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    safe_yaml (1.0.4)
     timecop (0.8.0)
+    vcr (3.0.1)
+    webmock (1.22.6)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   pi_piper
   rspec
   timecop
+  vcr
+  webmock
 
 BUNDLED WITH
    1.11.2

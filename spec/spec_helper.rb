@@ -1,5 +1,6 @@
 require 'walvic'
 require 'timecop'
+require 'support/vcr_setup'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

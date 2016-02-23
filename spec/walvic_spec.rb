@@ -15,9 +15,22 @@ describe Walvic do
     expect(walvic.url).to eq('http://goingunderground.herokuapp.com/stations/arriving/southbound/euston/2015-09-23T16:20:00.json')
   end
 
-  it 'gets some json' do
+  it 'gets some json', :vcr do
     json = walvic.json
-    expect(walvic.json)
+    expect(json.count).to eq(10)
+    expect(json.first).to eq([
+      {
+        "segment" => 1193,
+        "number" => 0,
+        "timeStamp" => "2015-09-23T16:08:39.575Z"
+      },
+      {
+        "CAR_A" => 29.443181818181817,
+        "CAR_B" => 17.266666666666666,
+        "CAR_C" => 12.931506849315069,
+        "CAR_D" => 13.32857142857143
+      }
+    ])
   end
 
 end
