@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.4.0)
+    coderay (1.1.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
@@ -9,9 +10,14 @@ GEM
     eventmachine (1.0.9)
     ffi (1.9.10)
     hashdiff (0.3.0)
+    method_source (0.8.2)
     pi_piper (1.9.9)
       eventmachine (= 1.0.9)
       ffi
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -26,6 +32,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     safe_yaml (1.0.4)
+    slop (3.6.0)
     timecop (0.8.0)
     vcr (3.0.1)
     webmock (1.22.6)
@@ -39,6 +46,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   pi_piper
+  pry
   rspec
   timecop
   vcr
