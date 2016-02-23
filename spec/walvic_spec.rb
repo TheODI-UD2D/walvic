@@ -33,4 +33,8 @@ describe Walvic do
     ])
   end
 
+  it 'gets the average occupancy', :vcr do
+    expect(walvic.average_occupancy).to eq(18)
+  end
+
 end
