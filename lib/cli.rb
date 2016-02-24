@@ -8,7 +8,7 @@ class CLI < Thor
                 :desc => 'Show lights for time (on 23rd Sept)'
 
   def lights station, direction
-    walvic = Walvic.new station, direction
+    walvic = Walvic.new station, direction, options[:time]
     walvic.illuminate
   end
 end
