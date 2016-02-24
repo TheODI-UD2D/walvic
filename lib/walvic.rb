@@ -10,11 +10,13 @@ class Walvic
 
   PINS = YAML.load_file 'config/pins.yaml'
 
-  def initialize station, direction, time: Time.now
+  def initialize station, direction, time: nil
     @station, @direction = station, direction
-    hour = time.hour
-    minute = time.min
-    @datetime = "2015-09-23T#{hour}:#{minute}:00"
+    unless time
+      time = Time.now.strftime('%H:%M')
+    end
+    @datetime = "2015-09-23T#{time}:00"
+    puts "Showing #{@station} #{@direction} at #{time}"
     setup_lights
   end
 
