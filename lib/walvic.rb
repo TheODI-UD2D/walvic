@@ -10,7 +10,7 @@ class Walvic
 
   PINS = YAML.load_file 'config/pins.yaml'
 
-  def initialize(station, direction, time: Time.now)
+  def initialize station, direction, time: Time.now
     @station, @direction = station, direction
     hour = time.hour
     minute = time.min
