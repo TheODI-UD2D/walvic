@@ -1,4 +1,5 @@
 require 'json'
+require 'yaml'
 require 'open-uri'
 require 'pi_piper'
 require 'dotenv'
@@ -7,12 +8,12 @@ Dotenv.load
 
 class Walvic
 
-  PINS = [15, 18, 23, 24, 25, 8]
+  PINS = YAML.load_file 'config/pins.yaml'
 
-  def initialize(station, direction)
+  def initialize(station, direction, time: Time.now)
     @station, @direction = station, direction
-    hour = Time.now.hour
-    minute = Time.now.min
+    hour = time.hour
+    minute = time.min
     @datetime = "2015-09-23T#{hour}:#{minute}:00"
     setup_lights
   end
@@ -30,13 +31,8 @@ class Walvic
   end
 
   def average_occupancy
-    loads = json.first.last
-    average = loads.values.inject{ |sum, el| sum + el }.to_f / loads.size
-    average.floor
-  end
-
-  def num_lights
-    ((average_occupancy / 10).floor.to_f / 2).floor
+    loads = json.first.last.values
+    loads.inject{ |sum, el| sum + el }.to_f / loads.size
   end
 
   def setup_lights
@@ -46,15 +42,18 @@ class Walvic
   end
 
   def illuminate
-    (0..num_lights).each do |i|
+    (0..Walvic.num_lights(average_occupancy)).each do |i|
       instance_variable_get("@pin_#{i}").on
       sleep 0.2
     end
     sleep 2
-    (num_lights).downto(0).each do |i|
+    (Walvic.num_lights(average_occupancy)).downto(0).each do |i|
       instance_variable_get("@pin_#{i}").off
       sleep 0.2
     end
   end
 
+  def self.num_lights average, leds = PINS.count
+    return (leds * (average / 100.0)).round
+  end
 end

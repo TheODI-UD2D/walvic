@@ -43,18 +43,33 @@ describe Walvic do
   end
 
   it 'gets the average occupancy', :vcr do
-    expect(walvic.average_occupancy).to eq(18)
-  end
-
-  it 'gets the correct number of lights to illuminate', :vcr do
-    expect(walvic.num_lights).to eq(0)
+    expect(walvic.average_occupancy.round).to eq(18)
   end
 
   it 'turns the right lights on and off', :vcr do
     expect(walvic.instance_variable_get("@pin_0")).to receive(:on)
+    expect(walvic.instance_variable_get("@pin_1")).to receive(:on)
+    expect(walvic.instance_variable_get("@pin_1")).to receive(:off)
     expect(walvic.instance_variable_get("@pin_0")).to receive(:off)
 
     walvic.illuminate
   end
 
+  context 'number of lights' do
+    it 'has 0 lights for a 0% average' do
+      expect(described_class.num_lights 0).to eq (0)
+    end
+
+    it 'has 8 lights for a 100% average' do
+      expect(described_class.num_lights 100).to eq 8
+    end
+
+    it 'has 4 lights for a 50% average' do
+      expect(described_class.num_lights 50).to eq 4
+    end
+
+    it 'has 7 lights for a 82% average' do
+      expect(described_class.num_lights 82).to eq 7
+    end
+  end
 end
