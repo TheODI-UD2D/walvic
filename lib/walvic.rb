@@ -16,7 +16,7 @@ class Walvic
       time = Time.now.strftime('%H:%M')
     end
     @datetime = "2015-09-23T#{time}:00"
-    puts "Showing #{@station} #{@direction} at #{time}"
+    print "Showing #{@station} #{@direction} at #{time}: "
     setup_lights
   end
 
@@ -34,7 +34,9 @@ class Walvic
 
   def average_occupancy
     loads = json.first.last.values
-    loads.inject{ |sum, el| sum + el }.to_f / loads.size
+    ave = loads.inject{ |sum, el| sum + el }.to_f / loads.size
+    puts "%d%%" % ave
+    ave
   end
 
   def setup_lights
