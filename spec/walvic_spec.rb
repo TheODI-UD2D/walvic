@@ -68,6 +68,10 @@ describe Walvic do
       expect(described_class.num_lights 50).to eq 4
     end
 
+    it 'has 6 lights for a 79% average' do
+      expect(described_class.num_lights 79).to eq 6
+    end
+
     it 'has 7 lights for a 82% average' do
       expect(described_class.num_lights 82).to eq 7
     end
