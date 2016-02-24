@@ -46,12 +46,13 @@ class Walvic
   end
 
   def illuminate
-    (0..Walvic.num_lights(average_occupancy)).each do |i|
+    ave = average_occupancy
+    (0..Walvic.num_lights(ave)).each do |i|
       instance_variable_get("@pin_#{i}").on
       sleep 0.2
     end
     sleep 2
-    (Walvic.num_lights(average_occupancy)).downto(0).each do |i|
+    (Walvic.num_lights(ave)).downto(0).each do |i|
       instance_variable_get("@pin_#{i}").off
       sleep 0.2
     end
