@@ -9,6 +9,7 @@ Dotenv.load
 class Walvic
 
   PINS = YAML.load_file 'config/pins.yaml'
+  CONFIG = YAML.load_file 'config/config.yaml'
 
   def initialize station, direction, time: nil
     @station, @direction = station, direction
@@ -47,14 +48,14 @@ class Walvic
 
   def illuminate
     ave = average_occupancy
-    (0..Walvic.num_lights(ave)).each do |i|
+    (0...Walvic.num_lights(ave)).each do |i|
       instance_variable_get("@pin_#{i}").on
-      sleep 0.2
+      sleep CONFIG['interval']
     end
-    sleep 2
+    sleep CONFIG['pause']
     (Walvic.num_lights(ave)).downto(0).each do |i|
       instance_variable_get("@pin_#{i}").off
-      sleep 0.2
+      sleep CONFIG['interval']
     end
   end
 

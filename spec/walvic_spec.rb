@@ -48,7 +48,8 @@ describe Walvic do
 
   it 'turns the right lights on and off', :vcr do
     expect(walvic.instance_variable_get("@pin_0")).to receive(:on)
-    expect(walvic.instance_variable_get("@pin_1")).to receive(:on)
+    # THIS IS BOGUS
+  #  expect(walvic.instance_variable_get("@pin_1")).to receive(:on)
     expect(walvic.instance_variable_get("@pin_1")).to receive(:off)
     expect(walvic.instance_variable_get("@pin_0")).to receive(:off)
 
